@@ -1,0 +1,31 @@
+<h1>Item form for {{id}}</h1>
+<h5>In JSON formate look like:</h5>
+<form [formGroup]="itemForm">
+    <button (click)="save()">Save</button>
+    <div>
+        <label>
+            <div>I buy with price:</div>
+            <input type="text" 
+                formControlName="buyPrice"/>
+        </label>
+    </div>
+    <div>
+        <label>
+            <div>I want buy:</div>
+            <input type="text" 
+                formControlName="buyCount"/>
+        </label>
+    </div>
+    <h4>I have some variant</h4>
+    <div formArrayName="priceList">
+        <div *ngFor="let priceVariant of itemForm.get('priceList').controls; let i = index"  [formGroupName]="i">
+            <input type="text" formControlName="price"/>
+            <input type="text" formControlName="count"/>
+            <button (click)="deletePrice(+i)">-</button>
+        </div>
+        <button (click)="addPrice()">+</button>
+    </div>
+</form>
+<pre *ngIf="this.item">
+    {{this.item.data | json}}
+</pre>

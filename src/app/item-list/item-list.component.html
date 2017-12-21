@@ -1,0 +1,21 @@
+<h4>Itemlist</h4>
+<div *ngFor="let item of itemLIst" [routerLink]="['/edit', item._id]">
+    <div>
+        <b>Item group: </b><span>{{ item.data.group }}</span>
+    </div>
+    <div>
+        <b>Data id: </b><span>{{ item.data.id }}</span>
+    </div>
+    <div>
+        <b>Buy price: </b><span>{{ item.data.priceBuy }}</span>
+    </div>
+    <div>
+        <b>Price cell: </b><span>{{ item.data.priceSeel }}</span>
+    </div>
+    <div>
+    <div *ngFor="let prices of item.data.prices"> 
+        Count: {{prices.count}}, with prices {{ prices.price }}
+    </div>
+    </div>
+    <br/>
+</div>

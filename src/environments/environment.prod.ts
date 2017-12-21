@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  host: 'https://market-helper.herokuapp.com/',
+  apiDatabase: 'api/database'
 };
