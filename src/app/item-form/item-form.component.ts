@@ -55,18 +55,16 @@ export class ItemFormComponent {
 
   private _addBuyCount(count: number): void {
     this.itemForm.get('buyCount').setValue(count);
-    console.log(this.itemForm.get('buyCount').value);
   }
 
   private _updateCount(): void {
-    const priceList = (this.itemForm.get('priceList') as FormArray);
+    const priceList: FormArray = (this.itemForm.get('priceList') as FormArray);
     let count: number = 0
     
     for (let i = 0; i < priceList.controls.length; i++) {
       count += +priceList.get(`${i}`).get('count').value;
     };
 
-    console.log(count)
     this._addBuyCount(count);
   }
   
