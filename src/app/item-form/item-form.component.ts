@@ -55,8 +55,11 @@ export class ItemFormComponent {
   };
 
   private _addBuyCount(count: number): void {
-    const buyCount: FormControl = this.itemForm.get('buyCount') as FormControl; 
-    buyCount.setValue(count);
+    const buyCount: FormControl = this.itemForm.get('buyCount') as FormControl;
+
+    if (buyCount.value < count) {
+      buyCount.setValue(count);
+    }
   }
 
   private _updateCount(): void {
