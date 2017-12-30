@@ -33,9 +33,6 @@ export class ItemFormService {
             'key': user.passwoord,
             'data': { ...data }
         };
-        /*id ? */sndedData._id = {
-            $oid: '5a4768ce5757cb0012debc8a'
-        }//: null;
         console.log('sndedData', sndedData);
         const request = this.http.post(this._host + this._databaseUrl,
             sndedData
