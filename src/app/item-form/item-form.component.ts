@@ -28,6 +28,7 @@ export class ItemFormComponent {
 
   public save(): void {
     console.log(this.itemForm.value);
+    this._updateCount();
     this.itemFormService.save(this.itemForm.value);
   };
 
@@ -54,7 +55,8 @@ export class ItemFormComponent {
   };
 
   private _addBuyCount(count: number): void {
-    this.itemForm.get('buyCount').setValue(count);
+    const buyCount: FormControl = this.itemForm.get('buyCount') as FormControl; 
+    buyCount.setValue(count);
   }
 
   private _updateCount(): void {
