@@ -52,6 +52,23 @@ export class ItemFormComponent {
 
     return false;
   };
+
+  private _addBuyCount(count: number): void {
+    this.itemForm.get('buyCount').setValue(count);
+    console.log(this.itemForm.get('buyCount').value);
+  }
+
+  private _updateCount(): void {
+    const priceList = (this.itemForm.get('priceList') as FormArray);
+    let count: number = 0
+    
+    for (let i = 0; i < priceList.controls.length; i++) {
+      count += +priceList.get(`${i}`).get('count').value;
+    };
+
+    console.log(count)
+    this._addBuyCount(count);
+  }
   
   public addPrice() {
     const control: FormArray = this.itemForm.get('priceList') as FormArray;
@@ -59,6 +76,7 @@ export class ItemFormComponent {
       return;
     }
     control.push(PriceArrayItem());
+    this._updateCount();
   }
 
   private _createForm(): void {
@@ -73,7 +91,7 @@ export class ItemFormComponent {
     };
 
     this.itemForm = new FormGroup({
-      buyPrice: new FormControl(currentPrice),
+      priceBuy: new FormControl(currentPrice),
       buyCount: new FormControl(currentCount),
       priceList: priceList
     });

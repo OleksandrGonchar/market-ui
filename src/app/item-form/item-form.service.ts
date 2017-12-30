@@ -6,6 +6,13 @@ import { environment } from '../../environments/environment';
 import { LoginUser } from './../interfaces/login-user.interface';
 import { LoginService } from './../login/login.service';
 
+interface DataForServer {
+    user: string;
+    key: string;
+    data: any;
+    _id?: any;
+}
+
 @Injectable()
 export class ItemFormService {
     private _host: string;
@@ -19,14 +26,20 @@ export class ItemFormService {
         this._databaseUrl = environment.apiDatabase;
     };
 
-    save(data) {
-        const user: LoginUser = this._login.getUser(); 
+    save(data, id?: string) {
+        const user: LoginUser = this._login.getUser();
+        const sndedData: DataForServer = {
+            'user': user.login,
+            'key': user.passwoord,
+            'data': { ...data }
+        };
+        /*id ? */sndedData._id = {
+            $oid: '5a4768ce5757cb0012debc8a'
+        }//: null;
+        console.log('sndedData', sndedData);
         const request = this.http.post(this._host + this._databaseUrl,
-            {
-                'user': user.login,
-                'key': user.passwoord,
-                'data': { data }
-            }, {}
+            sndedData
+            , {}
         ).subscribe(resp => {
             console.log({ data })
             console.log(resp);
