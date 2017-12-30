@@ -13,12 +13,12 @@
         <label>
             <div>I want buy:</div>
             <input type="text" 
-                formControlName="buyCount"/>
+                formControlName="count"/>
         </label>
     </div>
     <h4>I have some variant</h4>
-    <div formArrayName="priceList">
-        <div *ngFor="let priceVariant of itemForm.get('priceList').controls; let i = index"  [formGroupName]="i">
+    <div formArrayName="prices">
+        <div *ngFor="let priceVariant of itemForm.get('prices').controls; let i = index"  [formGroupName]="i">
             <input type="text" formControlName="price"/>
             <input type="text" formControlName="count"/>
             <button (click)="deletePrice(+i)">-</button>

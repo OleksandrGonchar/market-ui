@@ -33,19 +33,19 @@ export class ItemFormComponent {
   };
 
   public deletePrice(index: number): void {
-    const control: FormArray = this.itemForm.get('priceList') as FormArray;
+    const control: FormArray = this.itemForm.get('prices') as FormArray;
     control.removeAt(index);
   };
 
   /**
-   * Return true, if some input in pricelist has value smaller or equal to 0
+   * Return true, if some input in prices has value smaller or equal to 0
    */
   private _validatePriceArray(): boolean {
-    const priceList = (this.itemForm.get('priceList') as FormArray);
+    const prices = (this.itemForm.get('prices') as FormArray);
 
-    for (let i = 0; i < priceList.controls.length; i++) {
-      const price: boolean = +priceList.get(`${i}`).get('price').value <= 0;
-      const count: boolean = +priceList.get(`${i}`).get('count').value <= 0;
+    for (let i = 0; i < prices.controls.length; i++) {
+      const price: boolean = +prices.get(`${i}`).get('price').value <= 0;
+      const count: boolean = +prices.get(`${i}`).get('count').value <= 0;
       if (price || count) {
         return true;
       };
@@ -55,7 +55,7 @@ export class ItemFormComponent {
   };
 
   private _addBuyCount(count: number): void {
-    const buyCount: FormControl = this.itemForm.get('buyCount') as FormControl;
+    const buyCount: FormControl = this.itemForm.get('count') as FormControl;
 
     if (buyCount.value < count) {
       buyCount.setValue(count);
@@ -63,18 +63,18 @@ export class ItemFormComponent {
   }
 
   private _updateCount(): void {
-    const priceList: FormArray = (this.itemForm.get('priceList') as FormArray);
+    const prices: FormArray = (this.itemForm.get('prices') as FormArray);
     let count: number = 0
     
-    for (let i = 0; i < priceList.controls.length; i++) {
-      count += +priceList.get(`${i}`).get('count').value;
+    for (let i = 0; i < prices.controls.length; i++) {
+      count += +prices.get(`${i}`).get('count').value;
     };
 
     this._addBuyCount(count);
   }
   
   public addPrice() {
-    const control: FormArray = this.itemForm.get('priceList') as FormArray;
+    const control: FormArray = this.itemForm.get('prices') as FormArray;
     if (this._validatePriceArray()) {
       return;
     }
@@ -85,18 +85,18 @@ export class ItemFormComponent {
   private _createForm(): void {
     const currentPrice: number = (!!this.item && !!this.item.data) ? this.item.data.priceBuy : 0;
     const currentCount: number = (!!this.item && !!this.item.data) ? this.item.data.count : 0;
-    const priceList = new FormArray([]);
+    const prices = new FormArray([]);
 
     if (!!this.item && !!this.item.data) {
       this.item.data.prices.map((item): void => {
-        priceList.push(PriceArrayItem(item.price, item.count));
+        prices.push(PriceArrayItem(item.price, item.count));
       });
     };
 
     this.itemForm = new FormGroup({
       priceBuy: new FormControl(currentPrice),
-      buyCount: new FormControl(currentCount),
-      priceList: priceList
+      count: new FormControl(currentCount),
+      prices: prices
     });
   };
 
