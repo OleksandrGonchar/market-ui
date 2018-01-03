@@ -10,7 +10,7 @@ interface DataForServer {
     user: string;
     key: string;
     data: any;
-    _id?: any;
+    _id?: string;
 }
 
 @Injectable()
@@ -33,6 +33,7 @@ export class ItemFormService {
             'key': user.passwoord,
             'data': { ...data }
         };
+        sndedData._id = id;
         console.log('sndedData', sndedData);
         const request = this.http.post(this._host + this._databaseUrl,
             sndedData

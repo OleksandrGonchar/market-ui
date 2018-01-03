@@ -15,6 +15,7 @@ import { store } from './../store/store';
 })
 export class ItemFormComponent {
   private _sub: any;
+  private _dbId: string = '';
 
   public itemForm: FormGroup;
   public id: number;
@@ -29,7 +30,7 @@ export class ItemFormComponent {
   public save(): void {
     console.log(this.itemForm.value);
     this._updateCount();
-    this.itemFormService.save(this.itemForm.value);
+    this.itemFormService.save(this.itemForm.value, this._dbId);
   };
 
   public deletePrice(index: number): void {
@@ -88,6 +89,7 @@ export class ItemFormComponent {
     const prices = new FormArray([]);
 
     if (!!this.item && !!this.item.data) {
+      this._dbId = this.item._id;
       this.item.data.prices.map((item): void => {
         prices.push(PriceArrayItem(item.price, item.count));
       });
