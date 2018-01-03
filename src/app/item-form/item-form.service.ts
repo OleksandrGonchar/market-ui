@@ -3,15 +3,9 @@ import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
+import { DataForServer } from './interfaces/dataFromServer.interface';
 import { LoginUser } from './../interfaces/login-user.interface';
 import { LoginService } from './../login/login.service';
-
-interface DataForServer {
-    user: string;
-    key: string;
-    data: any;
-    _id?: string;
-}
 
 @Injectable()
 export class ItemFormService {
