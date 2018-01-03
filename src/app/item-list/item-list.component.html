@@ -12,6 +12,9 @@
     <div>
         <b>Price cell: </b><span>{{ item.data.priceSeel }}</span>
     </div>
+    <div *ngIf="item.data.pause">
+        <b>Item on pause!</b>
+    </div>
     <div>
     <div *ngFor="let prices of item.data.prices"> 
         Count: {{prices.count}}, with prices {{ prices.price }}
