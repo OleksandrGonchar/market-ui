@@ -86,6 +86,8 @@ export class ItemFormComponent {
   private _createForm(): void {
     const currentPrice: number = (!!this.item && !!this.item.data) ? this.item.data.priceBuy : 0;
     const currentCount: number = (!!this.item && !!this.item.data) ? this.item.data.count : 0;
+    const id: string = (!!this.item && !!this.item.data) ? this.item.data.id : '';
+    const group: string = (!!this.item && !!this.item.data) ? this.item.data.group : '';
     const prices = new FormArray([]);
 
     if (!!this.item && !!this.item.data) {
@@ -98,6 +100,8 @@ export class ItemFormComponent {
     this.itemForm = new FormGroup({
       priceBuy: new FormControl(currentPrice),
       count: new FormControl(currentCount),
+      id: new FormControl(id),
+      group: new FormControl(group),
       prices: prices
     });
   };

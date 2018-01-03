@@ -1,7 +1,18 @@
 <h1>Item form for {{id}}</h1>
-<h5>In JSON formate look like:</h5>
 <form [formGroup]="itemForm">
     <button (click)="save()">Save</button>
+    <div *ngIf="!itemForm.get('id').value">
+        <label>
+            <div>I buy item with id:</div>
+            <input type="text" formControlName="id"/>
+        </label>
+    </div>
+    <div *ngIf="!itemForm.get('group').value">
+        <label>
+            <div>I buy item with group:</div>
+            <input type="text" formControlName="group"/>
+        </label>
+    </div>
     <div>
         <label>
             <div>I buy with price:</div>
