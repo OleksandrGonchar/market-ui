@@ -92,9 +92,11 @@ export class ItemFormComponent {
 
     if (!!this.item && !!this.item.data) {
       this._dbId = this.item._id;
-      this.item.data.prices.map((item): void => {
-        prices.push(PriceArrayItem(item.price, item.count));
-      });
+      this.item.data.prices
+        .sort((a, b): number => a.price - b.price)
+        .map((item): void => {
+          prices.push(PriceArrayItem(item.price, item.count));
+        });
     };
 
     this.itemForm = new FormGroup({
