@@ -8,7 +8,13 @@ import { ItemListService } from './../services/item-list.service';
 @Component({
   selector: 'item-list',
   templateUrl: './item-list.component.html',
-  styles: []
+  styles: [`
+    .tougled {
+      max-height: 47px;
+      overflow: hidden;
+      background-image: linear-gradient(to top, #ccc, #eee, #fff);
+    }
+  `]
 })
 export class ItemLIstComponent {
   public itemLIst: Array<Item>;
@@ -16,6 +22,11 @@ export class ItemLIstComponent {
   private _storeSubscription;
   
   constructor(private geItems: ItemListService) {}
+
+  clickListener(item: any): void {
+    console.log(item.touglePriceLst);
+    item.touglePriceLst = !item.touglePriceLst; 
+  }
 
   ngOnInit() {
     this.geItems.getListOfElements()
