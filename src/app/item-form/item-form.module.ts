@@ -6,12 +6,14 @@ import { ItemFormService } from './item-form.service';
 
 import { ItemFormComponent } from './item-form.component';
 import { UrlParserComponent } from './url-parser/url-parser.component';
+import { AutoPricer } from './auto-pricer/auto-pricer.component';
 
 
 @NgModule({
   declarations: [
     ItemFormComponent,
-    UrlParserComponent
+    UrlParserComponent,
+    AutoPricer
   ],
   imports: [
     BrowserModule,

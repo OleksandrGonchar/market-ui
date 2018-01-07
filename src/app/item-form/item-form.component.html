@@ -54,6 +54,8 @@
         </div>
         <button (click)="addPrice()">+</button>
     </div>
+
+    <auto-pricer></auto-pricer>
 </form>
 <pre *ngIf="this.item">
     {{this.item.data | json}}
