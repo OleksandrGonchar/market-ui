@@ -115,6 +115,14 @@ export class ItemFormComponent {
     });
   };
 
+  public newConfigFromUrl(obj) {
+    const idInput = this.itemForm.get('id');
+    const groupInput = this.itemForm.get('group');
+
+    idInput.setValue(obj.id);
+    groupInput.setValue(obj.group);
+  }
+
   private _updateItem(): void {
     this.item = store.getState().collections
       .find(item => item._id === this.id);

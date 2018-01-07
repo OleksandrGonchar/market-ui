@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms'
+import { Component, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
+interface ConfigObject {
+  id: string;
+  group: string;
+}
 
 @Component({
   selector: 'url-parser',
@@ -8,9 +12,48 @@ import { FormGroup, FormControl, FormArray } from '@angular/forms'
   styles: []
 })
 export class UrlParserComponent {
+  public parseUrlForm: FormGroup;
+
+  @Output() parsedConfig = new EventEmitter<ConfigObject>()
+
   constructor() {};
 
-  ngOnInit() {};
+  private _notifyParent(configObject: ConfigObject): void {
+    this.parsedConfig.emit(configObject);
+  }
+
+  private _createForm(): void {
+    this.parseUrlForm = new FormGroup({
+      formUrl: new FormControl()
+    });
+  }
+
+  /**
+   * Take id and group from url string
+   */
+  private _parseUrl(url:string): any {
+    if (!url) { return; }
+    const regex: RegExp = /https\:\/\/market\.csgo\.com\/item\//
+    const urlWithoutAddres: string = url.replace(regex, '');
+    const regexNumbers: RegExp = /\d+/;
+    const id: string = regexNumbers.exec(urlWithoutAddres)[0];
+    const group: string = regexNumbers.exec(urlWithoutAddres
+      .replace(regexNumbers, '')
+      .replace(/\-/, ''))[0];
+
+    this._notifyParent({
+      id,
+      group
+    })
+  }
+
+  public parseUrl(): void {
+    this._parseUrl(this.parseUrlForm.get('formUrl').value);
+  }
+
+  ngOnInit() {
+    this._createForm();
+  };
 
   ngOnDestroy() {
   };

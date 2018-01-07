@@ -1,1 +1,9 @@
-<h1>sone url</h1>
+<div [formGroup]="parseUrlForm">
+    <label>
+        <div>Put url for existing item:</div>
+        <input formControlName="formUrl" type="text" />
+    </label>
+    <button (click)="parseUrl()">
+        Parse
+    </button>
+</div>
