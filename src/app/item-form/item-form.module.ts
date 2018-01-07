@@ -5,11 +5,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ItemFormService } from './item-form.service';
 
 import { ItemFormComponent } from './item-form.component';
+import { UrlParserComponent } from './url-parser/url-parser.component';
 
 
 @NgModule({
   declarations: [
-    ItemFormComponent
+    ItemFormComponent,
+    UrlParserComponent
   ],
   imports: [
     BrowserModule,
