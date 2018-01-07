@@ -1,10 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
-interface ConfigObject {
-  id: string;
-  group: string;
-}
+import { ConfigObject } from './../interfaces/itemConfig.interface';
 
 @Component({
   selector: 'url-parser',
@@ -14,7 +11,7 @@ interface ConfigObject {
 export class UrlParserComponent {
   public parseUrlForm: FormGroup;
 
-  @Output() parsedConfig = new EventEmitter<ConfigObject>()
+  @Output() public parsedConfig = new EventEmitter<ConfigObject>()
 
   constructor() {};
 

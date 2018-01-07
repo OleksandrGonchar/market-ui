@@ -1,7 +1,7 @@
 import { FormGroup, FormControl, FormArray } from '@angular/forms'
 
 export function PriceArrayItem(
-    price: string = '0', count: string = '0'
+    price: string = '0', count: string = '1'
 ): FormGroup {
     return new FormGroup({
         price: new FormControl(`${parseInt(price, 10)}`),
