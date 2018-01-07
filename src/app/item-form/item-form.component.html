@@ -1,20 +1,30 @@
-<h1>Item form for {{id}}</h1>
+<!-- <h1>Item form for {{id}}</h1> -->
 <form [formGroup]="itemForm">
     <button (click)="save()">Save</button>
-    <div *ngIf="!itemForm.get('id').value">
-        <label>
-            <div>I buy item with id:</div>
-            <input type="text" formControlName="id"/>
-        </label>
+    <!-- START: Block for changing method for creating items in dattabase -->
+    <div *ngIf="!itemForm.get('id').value || !itemForm.get('group').value">
+        <div>
+            <button (click)="changeActive()">
+                <span *ngIf="showByUrl">By url</span>
+                <span *ngIf="!showByUrl">By id</span>
+            </button>
+        </div>
+        <div *ngIf="!showByUrl">
+            <label>
+                <div>I buy item with id:</div>
+                <input type="text" formControlName="id"/>
+            </label>
+        </div>
+        <div *ngIf="!showByUrl">
+            <label>
+                <div>I buy item with group:</div>
+                <input type="text" formControlName="group"/>
+            </label>
+        </div>
+        <url-parser *ngIf="showByUrl" (parsedConfig)="newConfigFromUrl($event)">
+        </url-parser>
     </div>
-    <div *ngIf="!itemForm.get('group').value">
-        <label>
-            <div>I buy item with group:</div>
-            <input type="text" formControlName="group"/>
-        </label>
-    </div>
-    <url-parser (parsedConfig)="newConfigFromUrl($event)">
-    </url-parser>
+    <!-- END: Block for changing method for creating items in dattabase -->
     <div>
         <label>
             <div>Pause item</div>

@@ -19,6 +19,7 @@ export class ItemFormComponent {
 
   public itemForm: FormGroup;
   public id: number;
+  public showByUrl: boolean = true;
   public item;
 
   constructor(
@@ -81,6 +82,10 @@ export class ItemFormComponent {
     }
     control.push(PriceArrayItem());
     this._updateCount();
+  }
+
+  public changeActive() {
+    this.showByUrl = !this.showByUrl;
   }
 
   private _checkFulfilledData(item): boolean {
