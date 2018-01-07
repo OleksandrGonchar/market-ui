@@ -83,15 +83,20 @@ export class ItemFormComponent {
     this._updateCount();
   }
 
+  private _checkFulfilledData(item): boolean {
+    return !!item && !!item.data;
+  }
+
   private _createForm(): void {
-    const currentPrice: number = (!!this.item && !!this.item.data) ? this.item.data.priceBuy : 0;
-    const currentCount: number = (!!this.item && !!this.item.data) ? this.item.data.count : 0;
-    const id: string = (!!this.item && !!this.item.data) ? this.item.data.id : '';
-    const group: string = (!!this.item && !!this.item.data) ? this.item.data.group : '';
-    const pause: boolean = (!!this.item && !!this.item.data) ? !!this.item.data.pause : false;
+    const itemIsPresent: boolean = this._checkFulfilledData(this.item);
+    const currentPrice: number = itemIsPresent ? this.item.data.priceBuy : 0;
+    const currentCount: number = itemIsPresent ? this.item.data.count : 0;
+    const id: string = itemIsPresent ? this.item.data.id : '';
+    const group: string = itemIsPresent ? this.item.data.group : '';
+    const pause: boolean = itemIsPresent ? !!this.item.data.pause : false;
     const prices = new FormArray([]);
 
-    if (!!this.item && !!this.item.data) {
+    if (itemIsPresent) {
       this._dbId = this.item._id;
       this.item.data.prices
         .sort((a, b): number => a.price - b.price)
@@ -112,7 +117,7 @@ export class ItemFormComponent {
 
   private _updateItem(): void {
     this.item = store.getState().collections
-      .filter(item => item._id === this.id)[0];
+      .find(item => item._id === this.id);
 
     this._createForm();
   };
