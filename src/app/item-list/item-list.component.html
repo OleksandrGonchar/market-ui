@@ -2,6 +2,9 @@
 <div *ngFor="let item of itemLIst">
     <div [routerLink]="['/edit', item._id]">
         <div>
+            <span>From </span><b>{{ item.data.marketType }}</b>
+        </div>
+        <div>
             <b>Item group: </b><span>{{ item.data.group }}</span>
         </div>
         <div>

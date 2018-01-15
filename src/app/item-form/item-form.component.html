@@ -9,6 +9,12 @@
                 <span *ngIf="!showByUrl">By id</span>
             </button>
         </div>
+        <div>
+            <button *ngFor="let button of marketTypes"
+            (click)="changemarketTypeButton(button)">
+                {{ button }}
+            </button>
+        </div>
         <div *ngIf="!showByUrl">
             <label>
                 <div>I buy item with id:</div>

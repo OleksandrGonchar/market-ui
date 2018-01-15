@@ -32,6 +32,7 @@ export class ItemLIstComponent {
     this.geItems.getListOfElements()
     this._storeSubscription = store.subscribe(() => {
       this.itemLIst = store.getState().collections
+      console.log('this.itemLIst ', this.itemLIst);
     });
   }
 

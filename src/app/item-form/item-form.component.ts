@@ -8,6 +8,12 @@ import { ItemListService } from './../services/item-list.service';
 import { ItemFormService } from './item-form.service';
 import { store } from './../store/store';
 
+const marketTypes = {
+  csgo: 'csgo',
+  pubg: 'pubg',
+  dota: 'dota2'
+};
+
 @Component({
   selector: 'item-form',
   templateUrl: './item-form.component.html',
@@ -21,6 +27,7 @@ export class ItemFormComponent {
   public id: number;
   public showByUrl: boolean = true;
   public item;
+  public marketTypes = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -94,6 +101,7 @@ export class ItemFormComponent {
 
   private _createForm(): void {
     const itemIsPresent: boolean = this._checkFulfilledData(this.item);
+    const marketType: string = (itemIsPresent&&this.item.data.marketType) ? this.item.data.marketType : marketTypes.csgo;
     const currentPrice: number = itemIsPresent ? this.item.data.priceBuy : 0;
     const currentCount: number = itemIsPresent ? this.item.data.count : 0;
     const id: string = itemIsPresent ? this.item.data.id : '';
@@ -111,6 +119,7 @@ export class ItemFormComponent {
     };
 
     this.itemForm = new FormGroup({
+      marketType: new FormControl(marketType),
       priceBuy: new FormControl(currentPrice),
       count: new FormControl(currentCount),
       id: new FormControl(id),
@@ -135,10 +144,22 @@ export class ItemFormComponent {
     this._createForm();
   };
 
+  private _fillButtonArray() {
+    for (let item in marketTypes) {
+      this.marketTypes.push(item);
+    }
+  }
+
+  public changemarketTypeButton(type: string): void {
+    console.log(type);
+    this.itemForm.get('marketType').setValue(type);
+  }
+
   ngOnInit() {
     this._sub = this.route.params.subscribe(params => {
       this.id = params['id'];
     });
+    this._fillButtonArray();
 
     if (!this.item) {
       this.itemListService.getListOfElements();
