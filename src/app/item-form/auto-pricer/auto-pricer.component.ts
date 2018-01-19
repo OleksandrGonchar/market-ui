@@ -39,9 +39,7 @@ export class AutoPricer {
         const count: number = +this.priceForm.value.countOfPosition;
         const step: number = +this.priceForm.value.stepForPosition;
 
-        let price: number = +this.priceForm.value.minPrice;
-
-        for (; price <= maxPrice ; price += step) {
+        for (let price: number = +this.priceForm.value.minPrice; price <= maxPrice ; price += step) {
             arr.push({
                 price,
                 count
