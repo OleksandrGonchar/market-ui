@@ -18,10 +18,14 @@ export class AutoPricer {
     private _createForm(): void {
         this.priceForm = new FormGroup({
             countOfPosition: new FormControl(),
-            stepForPosition: new FormControl(),
+            stepForPosition: new FormControl(1),
             minPrice: new FormControl(),
             maxPrice: new FormControl()
         });
+    }
+
+    private _notifyParent(priceArray): void {
+        this.arrayOfPrices.emit(priceArray);
     }
 
     public toogleComponent(): void {
@@ -31,13 +35,19 @@ export class AutoPricer {
     public createPriceArray(): void {
         console.log(this.priceForm.value);
         const arr = [];
-        for (let i =0; i < this.priceForm.value.countOfPosition; i++) {
-            console.log(i);
+        const maxPrice: number = +this.priceForm.value.maxPrice;
+        const count: number = +this.priceForm.value.countOfPosition;
+        const step: number = +this.priceForm.value.stepForPosition;
+
+        let price: number = +this.priceForm.value.minPrice;
+
+        for (; price <= maxPrice ; price += step) {
             arr.push({
-                price: 0,
-                count: 0
-            })
+                price,
+                count
+            });
         }
+        this._notifyParent(arr);
     }
 
     ngOnInit() {

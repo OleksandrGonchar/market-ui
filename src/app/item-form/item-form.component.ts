@@ -46,6 +46,10 @@ export class ItemFormComponent {
     control.removeAt(index);
   };
 
+  public setAutoPrice(arrayOfPrices) {
+      console.log(arrayOfPrices);
+  }
+
   /**
    * Return true, if some input in prices has value smaller or equal to 0
    */
