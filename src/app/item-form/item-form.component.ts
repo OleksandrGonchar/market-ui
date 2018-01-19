@@ -47,7 +47,11 @@ export class ItemFormComponent {
   };
 
   public setAutoPrice(arrayOfPrices) {
-      console.log(arrayOfPrices);
+    const control: FormArray = this.itemForm.get('prices') as FormArray;
+
+    for (let i =0; i < arrayOfPrices.length; i++) {
+      control.push(PriceArrayItem(arrayOfPrices[i].price, arrayOfPrices[i].count));
+    }
   }
 
   /**
