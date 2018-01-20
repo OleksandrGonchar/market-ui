@@ -37,9 +37,21 @@ export class ItemFormComponent {
 
   public save(): void {
     console.log(this.itemForm.value);
+    if (this._validateInputFields()) {
+      console.warn('Empty form');
+      return;
+    }
     this._updateCount();
     this.itemFormService.save(this.itemForm.value, this._dbId);
   };
+
+  private _validateInputFields(): boolean {
+    return !this.itemForm.value.count &&
+      !this.itemForm.value.group &&
+      !this.itemForm.value.id &&
+      !this.itemForm.value.marketType &&
+      !this.itemForm.value.priceBuy;
+  }
 
   public deletePrice(index: number): void {
     const control: FormArray = this.itemForm.get('prices') as FormArray;
@@ -109,7 +121,7 @@ export class ItemFormComponent {
 
   private _createForm(): void {
     const itemIsPresent: boolean = this._checkFulfilledData(this.item);
-    const marketType: string = (itemIsPresent&&this.item.data.marketType) ? this.item.data.marketType : marketTypes.csgo;
+    const marketType: string = (itemIsPresent&&this.item.data.marketType) ? this.item.data.marketType : null;
     const currentPrice: number = itemIsPresent ? this.item.data.priceBuy : 0;
     const currentCount: number = itemIsPresent ? this.item.data.count : 0;
     const id: string = itemIsPresent ? this.item.data.id : '';
@@ -159,7 +171,6 @@ export class ItemFormComponent {
   }
 
   public changemarketTypeButton(type: string): void {
-    console.log(type);
     this.itemForm.get('marketType').setValue(type);
   }
 
