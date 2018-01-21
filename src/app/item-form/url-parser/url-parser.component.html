@@ -1,9 +1,10 @@
 <div [formGroup]="parseUrlForm">
-    <label>
-        <div>Put url for existing item:</div>
-        <input formControlName="formUrl" type="text" />
-    </label>
-    <button (click)="parseUrl()">
-        Parse
-    </button>
+    <mat-form-field>
+        <input formControlName="formUrl" matInput placeholder="Put url for existing item:">
+    </mat-form-field> 
+    <mat-chip-list style="display: inline-block;">
+        <mat-chip (click)="parseUrl()">
+            Parse
+        </mat-chip>
+    </mat-chip-list>
 </div>

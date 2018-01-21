@@ -14,6 +14,15 @@ import { AppComponent } from './app.component';
 import { ItemLIstComponent } from './item-list/item-list.component';
 import { ItemFormComponent } from './item-form/item-form.component';
 
+import {
+  MatCheckboxModule,
+  MatToolbarModule,
+  MatCardModule,
+  MatChipsModule
+} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 const appRoutes: Routes = [
   { path: 'edit', component: ItemFormComponent },
   { path: 'edit/:id', component: ItemFormComponent },
@@ -33,7 +42,10 @@ const appRoutes: Routes = [
     HttpClientModule,
     ItemListModule,
     ItemFormModule,
-    LoginModule
+    LoginModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatChipsModule
   ],
   providers: [
     ItemListService,

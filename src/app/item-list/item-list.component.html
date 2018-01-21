@@ -1,29 +1,30 @@
 <h4>Itemlist from {{itemLIst?.length}} elements</h4>
-<div *ngFor="let item of itemLIst">
-    <div [routerLink]="['/edit', item._id]">
-        <div>
-            <span>From </span><b>{{ item.data.marketType }}</b>
+<div style="display: flex; flex-wrap: wrap">
+    <mat-card *ngFor="let item of itemLIst" style="margin: 10px">
+            <div [routerLink]="['/edit', item._id]">
+            <div>
+                <span>From </span><b>{{ item.data.marketType }}</b>
+            </div>
+            <div>
+                <b>Item group: </b><span>{{ item.data.group }}</span>
+            </div>
+            <div>
+                <b>Data id: </b><span>{{ item.data.id }}</span>
+            </div>
+            <div>
+                <b>Buy price: </b><span>{{ item.data.priceBuy }}</span>
+            </div>
+            <div>
+                <b>Price cell: </b><span>{{ item.data.priceSeel }}</span>
+            </div>
+            <div *ngIf="item.data.pause">
+                <b>Item on pause!</b>
+            </div>
         </div>
-        <div>
-            <b>Item group: </b><span>{{ item.data.group }}</span>
+        <div class="item-list__price-container" (click)="clickListener(item)" [ngClass]="{'tougled': !item.touglePriceLst}" >
+            <div *ngFor="let prices of item.data.prices" class="item-list__price-item">
+                Count: {{prices.count}}, with prices {{ prices.price }}
+            </div>
         </div>
-        <div>
-            <b>Data id: </b><span>{{ item.data.id }}</span>
-        </div>
-        <div>
-            <b>Buy price: </b><span>{{ item.data.priceBuy }}</span>
-        </div>
-        <div>
-            <b>Price cell: </b><span>{{ item.data.priceSeel }}</span>
-        </div>
-        <div *ngIf="item.data.pause">
-            <b>Item on pause!</b>
-        </div>
-    </div>
-    <div class="item-list__price-container" (click)="clickListener(item)" [ngClass]="{'tougled': !item.touglePriceLst}" >
-        <div *ngFor="let prices of item.data.prices" class="item-list__price-item">
-            Count: {{prices.count}}, with prices {{ prices.price }}
-        </div>
-    </div>
-    <br/>
+    </mat-card>
 </div>

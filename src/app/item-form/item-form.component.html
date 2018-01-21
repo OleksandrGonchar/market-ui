@@ -1,31 +1,35 @@
-<!-- <h1>Item form for {{id}}</h1> -->
 <form [formGroup]="itemForm">
-    <button (click)="save()">Save</button>
+    <mat-chip-list style="margin-bottom: 30px; display: block;">
+        <mat-chip (click)="save()">
+            Save
+        </mat-chip>
+    </mat-chip-list>
     <!-- START: Block for changing method for creating items in dattabase -->
     <div *ngIf="!itemForm.get('id').value || !itemForm.get('group').value">
-        <div>
-            <button (click)="changeActive()">
+        <mat-chip-list style="margin-bottom: 30px; display: block;">
+            <mat-chip (click)="changeActive()">
                 <span *ngIf="showByUrl">By url</span>
                 <span *ngIf="!showByUrl">By id</span>
-            </button>
-        </div>
+            </mat-chip>
+        </mat-chip-list>
         <div>
-            <button *ngFor="let button of marketTypes"
-            (click)="changemarketTypeButton(button)">
-                {{ button }}
-            </button>
+            <mat-chip-list class="choose-market-type">
+                <mat-chip *ngFor="let button of marketTypes"
+                    [ngClass]="{ 'active': button === itemForm.get('marketType').value}"
+                    (click)="changemarketTypeButton(button)">
+                    {{ button }}
+                </mat-chip>
+            </mat-chip-list>
         </div>
         <div *ngIf="!showByUrl">
-            <label>
-                <div>I buy item with id:</div>
-                <input type="text" formControlName="id"/>
-            </label>
+            <mat-form-field>
+                <input formControlName="id" matInput placeholder="I buy item with id:">
+            </mat-form-field> 
         </div>
-        <div *ngIf="!showByUrl">
-            <label>
-                <div>I buy item with group:</div>
-                <input type="text" formControlName="group"/>
-            </label>
+        <div *ngIf="!showByUrl">            
+            <mat-form-field>
+                <input formControlName="group" matInput placeholder="I buy item with group:">
+            </mat-form-field> 
         </div>
         <url-parser *ngIf="showByUrl" (parsedConfig)="newConfigFromUrl($event)">
         </url-parser>
@@ -38,27 +42,31 @@
         </label>
     </div>
     <div>
-        <label>
-            <div>I buy with price:</div>
-            <input type="text" 
-                formControlName="priceBuy"/>
-        </label>
+        <mat-form-field>
+            <input formControlName="priceBuy" matInput placeholder="I buy with price:">
+        </mat-form-field>        
     </div>
     <div>
-        <label>
-            <div>I want buy:</div>
-            <input type="text" 
-                formControlName="count"/>
-        </label>
+        <mat-form-field>
+            <input formControlName="count" matInput placeholder="Input">
+        </mat-form-field>
     </div>
     <h4>I have some variant</h4>
     <div formArrayName="prices">
         <div *ngFor="let priceVariant of itemForm.get('prices').controls; let i = index"  [formGroupName]="i">
-            <input type="text" formControlName="price"/>
-            <input type="text" formControlName="count"/>
-            <button (click)="deletePrice(+i)">-</button>
+            <mat-form-field>
+                <input formControlName="price" matInput placeholder="price">
+            </mat-form-field>
+            <mat-form-field>
+                <input formControlName="count" matInput placeholder="count">
+            </mat-form-field>
+            <mat-chip-list class="remove-price-button">
+                <mat-chip (click)="deletePrice(+i)">-</mat-chip>
+            </mat-chip-list>
         </div>
-        <button (click)="addPrice()">+</button>
+        <mat-chip-list>
+            <mat-chip (click)="addPrice()">+</mat-chip>
+        </mat-chip-list>
     </div>
 
     <auto-pricer (arrayOfPrices)="setAutoPrice($event)">

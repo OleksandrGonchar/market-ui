@@ -1,11 +1,23 @@
-<button style="margin: 30px 0;" (click)="toogleComponent()">
-    Create prices
-</button>
+<mat-chip-list>
+    <mat-chip style="margin: 30px 0;" (click)="toogleComponent()">
+        Create prices
+    </mat-chip>
+</mat-chip-list>
 <div *ngIf="showForm" [formGroup]="priceForm">
-    <input formControlName="countOfPosition" placeholder="How much position you nead"/>
-    <input formControlName="stepForPosition" placeholder="Step for saling position"/>
-    <input formControlName="minPrice" placeholder="Min price"/>
-    <input formControlName="maxPrice" placeholder="Max price"/>
+    <mat-form-field>
+        <input formControlName="countOfPosition" matInput placeholder="How much position you nead"/>
+    </mat-form-field>
+    <mat-form-field>
+        <input formControlName="stepForPosition" matInput placeholder="Step for saling position"/>
+    </mat-form-field>
+    <mat-form-field>
+        <input formControlName="minPrice" matInput placeholder="Min price"/>
+    </mat-form-field>
+    <mat-form-field>
+        <input formControlName="maxPrice" matInput placeholder="Max price"/>
+    </mat-form-field>
 
-    <button (click)="createPriceArray()">Generate</button>
+    <mat-chip-list style="display: inline-block;">
+        <mat-chip (click)="createPriceArray()">Generate</mat-chip>
+    </mat-chip-list>
 </div>

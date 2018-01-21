@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ItemLIstComponent } from './item-list.component';
+import {
+  MatCardModule
+} from '@angular/material';
 
 
 @NgModule({
@@ -11,7 +14,8 @@ import { ItemLIstComponent } from './item-list.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule
+    RouterModule,
+    MatCardModule
   ],
   exports: [ItemLIstComponent],
   providers: [

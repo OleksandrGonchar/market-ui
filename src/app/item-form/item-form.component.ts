@@ -17,7 +17,7 @@ const marketTypes = {
 @Component({
   selector: 'item-form',
   templateUrl: './item-form.component.html',
-  styles: []
+  styleUrls: ['./item-form.component.css']
 })
 export class ItemFormComponent {
   private _sub: any;
@@ -46,10 +46,10 @@ export class ItemFormComponent {
   };
 
   private _validateInputFields(): boolean {
-    return !this.itemForm.value.count &&
-      !this.itemForm.value.group &&
-      !this.itemForm.value.id &&
-      !this.itemForm.value.marketType &&
+    return !this.itemForm.value.count ||
+      !this.itemForm.value.group ||
+      !this.itemForm.value.id ||
+      !this.itemForm.value.marketType ||
       !this.itemForm.value.priceBuy;
   }
 
